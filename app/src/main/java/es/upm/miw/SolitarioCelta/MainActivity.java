@@ -15,8 +15,10 @@ import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -93,6 +95,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.opcGuardarPartida:
                 guardarPartida();
                 return true;
+            case R.id.opcRecuperarPartida:
+                cargarPartida();
+                return true;
 
             // TODO!!! resto opciones
 
@@ -124,5 +129,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    public void cargarPartida(){
+        try {
+            BufferedReader fin = new BufferedReader(
+                    new InputStreamReader(openFileInput(getString(R.string.ficheroGuardarPartida))));
+            String juego = fin.readLine();
+            miJuego.deserializaTablero(juego);
+            mostrarTablero();
+
+            Toast.makeText(this,
+                    getString(R.string.positivoCargarPartida),
+                    Toast.LENGTH_SHORT).show();
+        }catch (IOException e) {
+            Toast.makeText(this,
+                    getString(R.string.negativoCargarPartida),
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
 }

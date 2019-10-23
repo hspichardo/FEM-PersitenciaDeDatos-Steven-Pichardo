@@ -27,6 +27,10 @@
     <string name="positivoGuardarPartida">Partida guardada exitosamente!!</string>
     <string name="negativoGuardarPartida">Error al guardar!!</string>
 
+    <!-- Cargar Partida -->
+
+    <string name="positivoCargarPartida">Partida cargada exitosamente!!</string>
+    <string name="negativoCargarPartida">Error al cargar!!</string>
 
     <!-- Acerca de -->
     <string name="aboutText">Acerca de</string>
