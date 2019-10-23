@@ -1,6 +1,7 @@
 package es.upm.miw.SolitarioCelta;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -10,8 +11,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -85,6 +90,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.opcReiniciarPartida:
                 new AlertRestartFragment().show(getSupportFragmentManager(),"ALERT DIALOG");
                 return true;
+            case R.id.opcGuardarPartida:
+                guardarPartida();
+                return true;
+
             // TODO!!! resto opciones
 
             default:
@@ -97,4 +106,23 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    public void guardarPartida(){
+
+        String tableroActual = miJuego.serializaTablero();
+        try {
+            FileOutputStream fos = openFileOutput(getString(R.string.ficheroGuardarPartida), Context.MODE_PRIVATE);
+            fos.write(tableroActual.getBytes());
+            fos.close();
+            Toast.makeText(this,
+                    getString(R.string.positivoGuardarPartida),
+                    Toast.LENGTH_SHORT).show();
+        }catch (IOException e) {
+            Toast.makeText(this,
+                    getString(R.string.negativoGuardarPartida),
+                    Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
 }

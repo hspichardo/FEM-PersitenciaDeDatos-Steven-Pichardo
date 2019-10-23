@@ -21,6 +21,13 @@
     <string name="txtDialogoFinalAfirmativo">Sí</string>
     <string name="txtDialogoFinalNegativo">No</string>
 
+    <!-- Guardar Partida -->
+
+    <string name="ficheroGuardarPartida">solitarioCelta.dat</string>
+    <string name="positivoGuardarPartida">Partida guardada exitosamente!!</string>
+    <string name="negativoGuardarPartida">Error al guardar!!</string>
+
+
     <!-- Acerca de -->
     <string name="aboutText">Acerca de</string>
     <string name="aboutMessage">El juego consiste en ir comiendo piezas
