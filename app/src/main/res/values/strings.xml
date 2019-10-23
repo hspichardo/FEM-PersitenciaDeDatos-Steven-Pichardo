@@ -8,6 +8,13 @@
     <string name="txtOpcionRecuperar">Recuperar Partida</string>
     <string name="txtOpcionMejoresResultados">Mejores Resultados</string>
 
+
+    <!-- Diálogo Reiniciar -->
+    <string name="txtDialogoReiniciarTitulo">Reiniciar Partida</string>
+    <string name="txtDialogoReiniciarPregunta">¿Desea Reiniciar la Partida?</string>
+    <string name="txtDialogoReiniciarAfirmativo">Sí</string>
+    <string name="txtDialogoReiniciarNegativo">No</string>
+
     <!-- Diálogo Final -->
     <string name="txtDialogoFinalTitulo">Fin del juego</string>
     <string name="txtDialogoFinalPregunta">¿Desea jugar otra partida?</string>

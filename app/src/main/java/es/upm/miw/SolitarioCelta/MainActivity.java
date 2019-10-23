@@ -82,7 +82,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.opcAcercaDe:
                 startActivity(new Intent(this, AcercaDe.class));
                 return true;
-
+            case R.id.opcReiniciarPartida:
+                new AlertRestartFragment().show(getSupportFragmentManager(),"ALERT DIALOG");
+                return true;
             // TODO!!! resto opciones
 
             default:
@@ -90,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
                         findViewById(android.R.id.content),
                         getString(R.string.txtSinImplementar),
                         Snackbar.LENGTH_LONG
+
                 ).show();
         }
         return true;
