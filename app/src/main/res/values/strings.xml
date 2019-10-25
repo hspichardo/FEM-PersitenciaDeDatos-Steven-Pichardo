@@ -28,7 +28,10 @@
     <string name="negativoGuardarPartida">Error al guardar!!</string>
 
     <!-- Cargar Partida -->
-
+    <string name="txtDialogoCargarPartidaTitulo">Cargar Partida</string>
+    <string name="txtDialogoCargarPartidaPregunta">¿Desea cargar la partida guardada?</string>
+    <string name="txtDialogoCargarPartidaAfirmativo">Sí</string>
+    <string name="txtDialogoCargarPartidaNegativo">No</string>
     <string name="positivoCargarPartida">Partida cargada exitosamente!!</string>
     <string name="negativoCargarPartida">Error al cargar!!</string>
 

@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 guardarPartida();
                 return true;
             case R.id.opcRecuperarPartida:
-                cargarPartida();
+                new AlertLoadGameFragment().show(getFragmentManager(),"ALERT DIALOG");
                 return true;
 
             // TODO!!! resto opciones
