@@ -1,12 +1,12 @@
-package es.upm.miw.SolitarioCelta;
+package es.upm.miw.solitarioCelta;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 
-public class AlertLoadGameFragment extends DialogFragment {
+public class AlertRestartFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final MainActivity main = (MainActivity) getActivity();
@@ -14,19 +14,20 @@ public class AlertLoadGameFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(main);
 
         builder
-                .setTitle(R.string.txtDialogoCargarPartidaTitulo)
-                .setMessage(R.string.txtDialogoCargarPartidaPregunta)
+                .setTitle(R.string.txtDialogoReiniciarTitulo)
+                .setMessage(R.string.txtDialogoReiniciarPregunta)
                 .setPositiveButton(
-                        getString(R.string.txtDialogoCargarPartidaAfirmativo),
+                        getString(R.string.txtDialogoReiniciarAfirmativo),
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int wich) {
-                                main.cargarPartida();
+                                main.miJuego.reiniciar();
+                                main.mostrarTablero();
                             }
                         }
                 )
                 .setNegativeButton(
-                        getString(R.string.txtDialogoCargarPartidaNegativo),
+                        getString(R.string.txtDialogoReiniciarNegativo),
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int wich) {
