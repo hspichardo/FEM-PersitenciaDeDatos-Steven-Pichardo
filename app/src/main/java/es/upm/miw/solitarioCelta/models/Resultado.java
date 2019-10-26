@@ -1,16 +1,29 @@
 package es.upm.miw.solitarioCelta.models;
 
-public class Resultado {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Resultado implements Parcelable {
+    private int id;
     private String nombre;
     private int numFichas;
     private String hora;
     private String fecha;
 
-    public Resultado(String nombre, int numFichas, String hora, String fecha) {
+    public Resultado(int id, String nombre, int numFichas, String hora, String fecha) {
+        this.id = id;
         this.nombre = nombre;
         this.numFichas = numFichas;
         this.hora = hora;
         this.fecha = fecha;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -45,6 +58,13 @@ public class Resultado {
         this.fecha = fecha;
     }
 
+    protected Resultado (Parcel in){
+        id = in.readInt();
+        nombre = in.readString();
+        fecha = in.readString();
+        hora = in.readString();
+    }
+
     @Override
     public String toString() {
         return "Resultado{" +
@@ -54,5 +74,31 @@ public class Resultado {
                 ", fecha='" + fecha + '\'' +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+            parcel.writeInt(id);
+            parcel.writeString(nombre);
+            parcel.writeString(fecha);
+            parcel.writeString(hora);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Resultado> CREATOR = new Parcelable.Creator<Resultado>() {
+        @Override
+        public Resultado createFromParcel(Parcel in) {
+            return new Resultado(in);
+        }
+
+       @Override
+        public Resultado[] newArray(int size){
+            return new Resultado[size];
+       }
+    };
 }
 

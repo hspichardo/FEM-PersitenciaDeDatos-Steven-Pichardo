@@ -23,7 +23,7 @@ import java.io.InputStreamReader;
 public class MainActivity extends AppCompatActivity {
 
 	SCeltaViewModel miJuego;
-    public final String LOG_KEY = "MiW";
+    public static final String LOG_KEY = "MiW";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
