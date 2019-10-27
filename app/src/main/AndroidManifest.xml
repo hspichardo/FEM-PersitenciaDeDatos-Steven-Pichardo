@@ -29,6 +29,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity android:name="es.upm.miw.solitarioCelta.SCeltaListaResultados">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
         <activity
             android:name="es.upm.miw.solitarioCelta.SCeltaPrefs"
             android:theme="@style/AppTheme"

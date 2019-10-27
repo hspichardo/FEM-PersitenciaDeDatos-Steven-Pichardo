@@ -3,7 +3,11 @@ package es.upm.miw.solitarioCelta;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -19,6 +23,10 @@ import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import es.upm.miw.solitarioCelta.models.RepositorioResultado;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
      * tiene un identificador en formato pXY, donde X es la fila e Y la columna
      * @param v Vista de la ficha pulsada
      */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void fichaPulsada(@NotNull View v) {
         String resourceName = getResources().getResourceEntryName(v.getId());
         int i = resourceName.charAt(1) - '0';   // fila
@@ -51,6 +60,16 @@ public class MainActivity extends AppCompatActivity {
         mostrarTablero();
         if (miJuego.juegoTerminado()) {
             // TODO guardar puntuación
+
+
+            RepositorioResultado repositorioResultado = new RepositorioResultado(this);
+            repositorioResultado.add(
+                  getJugador(),
+                    LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                    LocalDateTime.now().format(DateTimeFormatter.ISO_TIME),
+                    miJuego.numeroFichas()
+
+            );
             new AlertDialogFragment().show(getFragmentManager(), "ALERT_DIALOG");
         }
     }
@@ -97,6 +116,9 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.opcRecuperarPartida:
                 new AlertLoadGameFragment().show(getFragmentManager(),"ALERT DIALOG");
+                return true;
+            case R.id.opcMejoresResultados:
+                startActivity(new Intent(this,SCeltaListaResultados.class));
                 return true;
 
             // TODO!!! resto opciones
@@ -146,6 +168,11 @@ public class MainActivity extends AppCompatActivity {
                     getString(R.string.negativoCargarPartida),
                     Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private String getJugador() {
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+        return settings.getString(getString(R.string.key_nombre_jugador), getString(R.string.default_jugador));
     }
 
 

@@ -63,6 +63,7 @@ public class Resultado implements Parcelable {
         nombre = in.readString();
         fecha = in.readString();
         hora = in.readString();
+        numFichas = in.readInt();
     }
 
     @Override
@@ -86,6 +87,7 @@ public class Resultado implements Parcelable {
             parcel.writeString(nombre);
             parcel.writeString(fecha);
             parcel.writeString(hora);
+            parcel.writeInt(numFichas);
     }
 
     @SuppressWarnings("unused")
