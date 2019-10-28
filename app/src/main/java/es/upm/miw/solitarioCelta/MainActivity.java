@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
@@ -14,7 +15,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Chronometer;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
@@ -23,14 +26,18 @@ import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Locale;
 
 import es.upm.miw.solitarioCelta.models.RepositorioResultado;
 
 public class MainActivity extends AppCompatActivity {
 
 	SCeltaViewModel miJuego;
+	public Chronometer cronometro;
     public static final String LOG_KEY = "MiW";
 
     public void onCreate(Bundle savedInstanceState) {
@@ -38,7 +45,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         miJuego = ViewModelProviders.of(this).get(SCeltaViewModel.class);
+        cronometro = findViewById(R.id.cronometro);
+
+        if(savedInstanceState != null){
+            cronometro.setBase(savedInstanceState.getLong("crono",cronometro.getBase()));
+        }
+        cronometro.start();
         mostrarTablero();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putLong("crono", cronometro.getBase());
     }
 
     /**
@@ -67,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
                   getJugador(),
                     LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                     LocalDateTime.now().format(DateTimeFormatter.ISO_TIME),
-                    miJuego.numeroFichas()
+                    miJuego.numeroFichas(), new SimpleDateFormat("mm:ss", Locale.US)
+                            .format(new Date(SystemClock.elapsedRealtime() - cronometro.getBase()))
 
             );
             new AlertDialogFragment().show(getFragmentManager(), "ALERT_DIALOG");
@@ -80,8 +100,11 @@ public class MainActivity extends AppCompatActivity {
     public void mostrarTablero() {
         RadioButton button;
         String strRId;
+        TextView tvFichas = findViewById(R.id.barraEstado);
         String prefijoIdentificador = getPackageName() + ":id/p"; // formato: package:type/entry
         int idBoton;
+
+        tvFichas.setText("Fichas Restantes: " + String.valueOf(miJuego.numeroFichas()));
 
         for (int i = 0; i < JuegoCelta.TAMANIO; i++)
             for (int j = 0; j < JuegoCelta.TAMANIO; j++) {
@@ -92,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
                     button.setChecked(miJuego.obtenerFicha(i, j) == JuegoCelta.FICHA);
                 }
             }
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

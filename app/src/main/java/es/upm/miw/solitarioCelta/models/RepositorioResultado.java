@@ -26,6 +26,7 @@ public class RepositorioResultado extends SQLiteOpenHelper {
                     tablaResultado.COL_NAME_NOMBRE + " TEXT," +
                     tablaResultado.COL_NAME_NUMFICHAS + " INT," +
                     tablaResultado.COL_NAME_HORA + " TEXT," +
+                    tablaResultado.COL_NAME_TIEMPO_JUGADO + " TEXT,"+
                     tablaResultado.COL_NAME_FECHA + " TEXT)";
 
     private static final String SQL_DELETE_ENTRIES =
@@ -48,13 +49,14 @@ public class RepositorioResultado extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public Long add(String nombre, String fecha, String hora, int numFichas){
+    public Long add(String nombre, String fecha, String hora, int numFichas, String tiempoJugado){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(tablaResultado.COL_NAME_NOMBRE,nombre);
         values.put(tablaResultado.COL_NAME_FECHA,fecha);
         values.put(tablaResultado.COL_NAME_HORA,hora);
         values.put(tablaResultado.COL_NAME_NUMFICHAS, numFichas);
+        values.put(tablaResultado.COL_NAME_TIEMPO_JUGADO,tiempoJugado);
 
         return db.insert(tablaResultado.TABLE_NAME,null,values);
 
@@ -83,7 +85,8 @@ public class RepositorioResultado extends SQLiteOpenHelper {
                 cursor.getString(cursor.getColumnIndex(tablaResultado.COL_NAME_NOMBRE)),
                 cursor.getInt(cursor.getColumnIndex(tablaResultado.COL_NAME_NUMFICHAS)),
                 cursor.getString(cursor.getColumnIndex(tablaResultado.COL_NAME_HORA)),
-                cursor.getString(cursor.getColumnIndex(tablaResultado.COL_NAME_FECHA))
+                cursor.getString(cursor.getColumnIndex(tablaResultado.COL_NAME_FECHA)),
+                cursor.getString(cursor.getColumnIndex(tablaResultado.COL_NAME_TIEMPO_JUGADO))
         );
     }
 

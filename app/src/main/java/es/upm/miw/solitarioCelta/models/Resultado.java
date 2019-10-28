@@ -9,13 +9,23 @@ public class Resultado implements Parcelable {
     private int numFichas;
     private String hora;
     private String fecha;
+    private String tiempoJugado;
 
-    public Resultado(int id, String nombre, int numFichas, String hora, String fecha) {
+    public Resultado(int id, String nombre, int numFichas, String hora, String fecha, String tiempoJugado) {
         this.id = id;
         this.nombre = nombre;
         this.numFichas = numFichas;
         this.hora = hora;
         this.fecha = fecha;
+        this.tiempoJugado = tiempoJugado;
+    }
+
+    public String  getTiempoJugado() {
+        return tiempoJugado;
+    }
+
+    public void setTiempoJugado(String  tiempoJugado) {
+        this.tiempoJugado = tiempoJugado;
     }
 
     public int getId() {
@@ -88,6 +98,7 @@ public class Resultado implements Parcelable {
             parcel.writeString(fecha);
             parcel.writeString(hora);
             parcel.writeInt(numFichas);
+            parcel.writeString(tiempoJugado);
     }
 
     @SuppressWarnings("unused")

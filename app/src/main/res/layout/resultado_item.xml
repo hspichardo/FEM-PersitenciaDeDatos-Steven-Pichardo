@@ -43,5 +43,13 @@
             android:text='@{"Fichas restantes: " + String.valueOf(resultado.numFichas)}'>
         </TextView>
 
+        <TextView
+            android:id="@+id/tvTiempoJuegoResultado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text='@{"Tiempo Jugado: " + String.valueOf(resultado.tiempoJugado)}'>
+        </TextView>
+
     </LinearLayout>
 </layout>

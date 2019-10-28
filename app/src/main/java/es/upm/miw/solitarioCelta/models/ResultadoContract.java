@@ -15,6 +15,7 @@ final public class ResultadoContract {
         static final String COL_NAME_NUMFICHAS = "numFichas";
         static final String COL_NAME_HORA     = "hora";
         static final String COL_NAME_FECHA    = "fecha";
+        static final String COL_NAME_TIEMPO_JUGADO    = "tiempoJugado";
     }
 }
 
